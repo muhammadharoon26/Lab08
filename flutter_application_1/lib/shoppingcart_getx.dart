@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(ShoppingCartApp());
+  runApp(const ShoppingCartApp());
 }
 
 class ShoppingCartApp extends StatelessWidget {
+  const ShoppingCartApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -33,6 +35,7 @@ class Product {
   Product(this.name, this.price);
 }
 
+// ignore: use_key_in_widget_constructors
 class ProductListPage extends StatelessWidget {
   final CartController cartController = Get.put(CartController());
 
@@ -46,10 +49,10 @@ class ProductListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: const Text('Product List'),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () => Get.to(() => CartPage()),
           )
         ],
@@ -65,7 +68,7 @@ class ProductListPage extends StatelessWidget {
               onPressed: () {
                 cartController.addToCart(product);
               },
-              child: Text('Add to Cart'),
+              child: const Text('Add to Cart'),
             ),
           );
         },
@@ -74,13 +77,14 @@ class ProductListPage extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class CartPage extends StatelessWidget {
   final CartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cart')),
+      appBar: AppBar(title: const Text('Cart')),
       body: Obx(() {
         return ListView.builder(
           itemCount: cartController.cart.length,
@@ -90,7 +94,7 @@ class CartPage extends StatelessWidget {
               title: Text(product.name),
               subtitle: Text('\$${product.price}'),
               trailing: IconButton(
-                icon: Icon(Icons.remove),
+                icon: const Icon(Icons.remove),
                 onPressed: () {
                   cartController.removeFromCart(product);
                 },
